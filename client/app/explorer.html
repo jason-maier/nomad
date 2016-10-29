@@ -1,0 +1,138 @@
+<!-- START NAVBAR -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/#/">NOMAD</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li id="custom-nav"><a href='#/nomad'>Create Event</a></li>
+          <li id="custom-nav"><a href='#/explorer'>Explore Events</a> <div class='menuselect'></div></li>
+          <li><a href='/#/explorer' data-target = '#login-modal' data-toggle="modal" style="color:#fff">Sign In</a>
+            
+            </li>
+          <li><a href='/#/explorer' data-target = '#signup-modal' data-toggle="modal" class="landing-pg-links" style="color:#fff">Sign Up</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- NAV MODALS -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>Login to Your Account</h1><br>
+        <form>
+          <input type="text" name="email-login" placeholder="Email">
+          <input type="password" name="pass-login" placeholder="Password">
+          <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+          <div class="col-md-12">
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-primary">Facebook</a>
+              <a href="#" class="btn btn-danger">Google</a>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>Sign up</h1><br>
+        <form ng-controller='profileCtrl'>
+          <input ng-model='username' type="text" name="firstName" placeholder="Name">
+          <input ng-model='email' type="text" name="email-signup" placeholder="Your email">
+          <input ng-model='password' type="password" name="pass-signup" placeholder="Password">
+          <input type="submit" name="login" class="login loginmodal-submit" value="Sign Up" ng-click='addUser()'>
+        </form>
+    </div>
+  </div>
+</div> 
+<!-- END NAVBAR -->
+
+<!-- BODY CONTAINER -->
+<div ng-controller='mapCtrl' class="container-fluid" style="margin-top: 50px">  
+  <!-- start map row -->
+  <div class="row mapper">
+    <div class="col-md-12" style="padding:0px 0px 0px 0px">
+      <input id='locSearch' class='controls' type='text' placeholder='search events in location' style="margin-left: 12px" ng-model='addressSearch' ng-change='choseAddress()'>
+      <select id='radiusSelect' class='controls' name='radiusSelect' ng-model='radius' ng-change='radiusChange()' style="margin-left: 12px;">
+        <option value=''>select radius</option>
+        <option value='1'>1 mile</option>
+        <option value='2'>2 mile</option>
+        <option value='5'>5 mile</option>
+      </select>
+      <div class='row' id='mapContainer'>
+        <div class='col-md-12' id='map' ></div>
+      </div>
+    </div>
+  </div>
+  <!-- end map row -->
+
+  <!-- start events header row -->
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h3>Explore Events</h3>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <!-- end events header row -->
+
+  <!-- start error alert row -->
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <center>
+        <div class='{{message.cl}}'> <h3 style="font-size: 230%"> {{message.msg}} </h3> </div>
+      </center>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <!-- end error alert row -->
+
+  <!-- start events list row -->
+  <div class="row listElement {{event.other}}" id='listContainer' ng-repeat='event in eventList | orderBy: "id" ' style="padding: 2% 0% 2% 0%">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">      
+      <div class='col-md-1' style="padding: 10px 15px 0px 0px">
+        <div class="map_icon" ng-model='labels'>
+         {{labels[$index]}}          
+        </div>  
+      </div>
+      <div class='col-md-5' style="padding:0px 0px 0px 0px ">            
+        <h3 style="margin-bottom: 3px; font-family: 'ProximaNova-reg';">{{event.name}}</h3>
+        <span class="event">Hosted by <strong>{{event.host}}</strong></span>        
+        <br><br>
+        <div ng-repeat='time in event.time'>
+          <span class="event" style="font-family:'ProximaNova-light'; font-size: 14px">{{ time.start }} - 
+        {{ time.end }}</span>
+        </div>        
+        <br>
+
+        <div>
+          <span style="display:inline-block; font-family:'ProximaNova-light'; color: #FFFFFF; ">
+            <img src="assets/map_icon_grey.png" style="height:15px">
+            <!-- {{event.address}} -->
+          </span>
+        </div>
+      </div>
+      </br>
+      <p class='col-md-6 eventDescription'>{{event.description}}
+      </br>
+      <a style="background-color:#30AEB4; border-color: #30AEB4; " ng-href={{event.paypal}} id="paypal" target="_blank" class="btn btn-info" role="button">Tip Me!</a>
+      </p> 
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <!-- end events list row -->
+</div>

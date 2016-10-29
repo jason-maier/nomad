@@ -1,0 +1,128 @@
+<!-- START NAVBAR -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/#/">NOMAD</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li id="custom-nav"><a href='#/nomad'>Create Event</a></li>
+          <li id="custom-nav"><a href='#/explorer'>Explore Events</a> <div class='menuselect'></div></li>
+          <li><a href='/#/profile' data-target = '#login-modal' data-toggle="modal" style="color:#fff">Sign In</a>
+            
+            </li>
+          <li><a href='/#/profile' data-target = '#signup-modal' data-toggle="modal" class="landing-pg-links" style="color:#fff">Sign Up</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- NAV MODALS -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>Login to Your Account</h1><br>
+        <form>
+          <input type="text" name="email-login" placeholder="Email">
+          <input type="password" name="pass-login" placeholder="Password">
+          <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+          <div class="col-md-12">
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-primary">Facebook</a>
+              <a href="#" class="btn btn-danger">Google</a>
+            </div>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="loginmodal-container">
+      <h1>Sign up</h1><br>
+        <form>
+          <input type="text" name="firstName" placeholder="Name">
+          <input type="text" name="email-signup" placeholder="Your email">
+          <input type="password" name="pass-signup" placeholder="Password">
+          <input type="password" name="reenterpass" placeholder="Re-Enter Password">
+          <input type="submit" name="login" class="login loginmodal-submit" value="Sign Up">
+        </form>
+    </div>
+  </div>
+</div> 
+<!-- END NAVBAR -->
+<div class="everything" ng-controller="profileCtrl">
+    <div class="card hovercard">
+        <div class="card-background">
+            <img class="card-bkimg" alt="" src="http://i.imgur.com/PeEdrfv.png">
+        </div>
+        <div class="useravatar">
+            <img alt="" src="http://i.imgur.com/NvUJzgQ.png">
+                <p style="font-size: 200%;"> Michelle Li </p> 
+        </div>
+    </div>
+    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+            <button style="background-color: #42c9cf; border-color: #42c9cf;" type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <div class="hidden-xs">Favorite</div>
+            </button>
+        </div>
+        <div class="btn-group" role="group">
+            <button ng-click="userFetch()" type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <div class="hidden-xs">Your Events</div>
+            </button>
+        </div>
+    </div>
+    <div class="well">
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="tab1">
+        <!-- Beginning of User Events List -->
+          <h3>That's so tab 1</h3>
+        </div>
+        <div class="tab-pane fade in" id="tab3">
+          <h3>Your Events</h3>
+          <div class="row listElement {{event.other}}" id='listContainer' ng-repeat='event in eventList | orderBy: "id" ' style="padding: 2% 0% 2% 0%">
+          <div class="col-md-2"></div>
+       <div class="col-md-8">      
+      <div class='col-md-1' style="padding: 10px 15px 0px 0px">
+        <div class="map_icon" ng-model='labels'>
+         {{labels[$index]}}          
+        </div>  
+      </div>
+      <div class='col-md-5' style="padding:0px 0px 0px 0px ">            
+        <h3 style="margin-bottom: 3px; font-family: 'ProximaNova-reg';">{{event.name}}</h3>
+        <span class="event">Hosted by <strong>{{event.host}}</strong></span>        
+        <br><br>
+        <div ng-repeat='time in event.time'>
+          <span class="event" style="font-family:'ProximaNova-light'; font-size: 14px">{{ time.start }} - 
+          {{ time.end }}</span>
+        </div>        
+        <br>
+
+        <div>
+          <span style="display:inline-block; font-family:'ProximaNova-light'; color: #FFFFFF; ">
+            <img src="assets/map_icon_grey.png" style="height:15px">
+            <!-- {{event.address}} -->
+          </span>
+        </div>
+      </div>
+      </br>
+      <p class='col-md-6 eventDescription'>{{event.description}}
+      </br>
+      <a style="background-color:#30AEB4; border-color: #30AEB4; " ng-href={{event.paypal}} id="paypal" target="_blank" class="btn btn-info" role="button">Tip Me!</a>
+      </p> 
+
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+        </div>
+      </div>
+    </div>
+  </div>
