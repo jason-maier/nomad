@@ -1,23 +1,23 @@
-<div id='landing' class="landing-bg" >
+<div id='landing' class="landing-bg" ng-controller="profileCtrl">
 	<div class="row" style="padding:25px 0px 0px 0px; margin: 0px 0px 0px 0px;"">
 	  <div class="col-md-1"></div>
 	  <div class="col-md-1" style="font-size: 34px; font-family:'ProximaNova-Reg'; color:#fff">NOMAD</div>
 	  <div class="col-md-7"></div>	
 		<div class="col-md-1" style="padding-top:10px;">
-			<a href='#/' data-target = '#login-modal' data-toggle="modal" class="landing-pg-links" style="color:#fff">LOG IN</a>
+			<a href='#/' data-target = '#login-modal' data-toggle="modal" class="landing-pg-links" style="color:#fff"></a>
 		</div>
 		          <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                   <div class="modal-dialog">
                   <div class="loginmodal-container">
                     <h1>Login to Your Account</h1><br>
-                    <form>
-                    <input type="text" name="email-login" placeholder="Email">
-                    <input type="password" name="pass-login" placeholder="Password">
+                    <form name='myForm' ng-submit='userLogin(); cancel()'>
+                    <input type="text" ng-model='email' name="email-login" placeholder="Email">
+                    <input type="password" ng-model='password' name="pass-login" placeholder="Password">
                     <input type="submit" name="login" class="login loginmodal-submit" value="Login">
                     <div class="col-md-12">
                       <div class="btn-group btn-group-justified">
-                      <a href="#" class="btn btn-primary">Facebook</a>
-                      <a href="#" class="btn btn-danger">Google</a>
+                      <a href="auth/facebook" class="btn btn-primary">Facebook</a>
+                      <a href="/auth/google" class="btn btn-danger">Google</a>
                       </div>
                     </div>
 
@@ -26,7 +26,7 @@
                 </div>
                 </div>
 	  <div class="col-md-1" style="padding-top:10px;">
-			<a href='#/' data-target = '#signup-modal' data-toggle="modal" class="landing-pg-links" style="color:#fff">SIGN UP</a>
+			<a href='#/' data-target = '#signup-modal' data-toggle="modal" class="landing-pg-links" style="color:#fff"></a>
 	  </div>	 
 <!-- 	          <div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
@@ -47,7 +47,7 @@
   <div class="modal-dialog">
     <div class="loginmodal-container">
       <h1>Sign up</h1><br>
-        <form ng-controller='profileCtrl'>
+        <form>
           <input ng-model='username' type="text" name="firstName" placeholder="Name">
           <input ng-model='email' type="text" name="email-signup" placeholder="Your email">
           <input ng-model='password' type="password" name="pass-signup" placeholder="Password">
